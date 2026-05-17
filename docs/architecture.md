@@ -4,7 +4,7 @@
 
 TurboQuant compresses the KV (Key-Value) cache during autoregressive LLM inference. The KV cache stores previously computed key and value tensors for the attention mechanism, growing linearly with sequence length. At long contexts (8K+ tokens), it dominates GPU memory usage.
 
-TurboQuant applies two complementary quantization techniques from Zandieh et al. (arXiv 2504.19874):
+TurboQuant applies two complementary quantization techniques from [Google Research](https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/) (Zandieh et al., [arXiv 2504.19874](https://arxiv.org/abs/2504.19874), ICLR 2026):
 
 1. **PolarQuant** — 3-bit Lloyd-Max quantization with magnitude/sign decomposition
 2. **QJL** — 1-bit Quantized Johnson-Lindenstrauss residual projection (keys only)
@@ -162,7 +162,7 @@ public static func turboDecodeV(
 
 ## Quality Characteristics
 
-From the TurboQuant paper (Table 1):
+From the [TurboQuant paper](https://arxiv.org/abs/2504.19874) (Table 1, Zandieh et al., ICLR 2026):
 
 - **Perplexity increase**: +0.1-0.3 across model families (negligible)
 - **Downstream task accuracy**: Within 1% of fp16 on most benchmarks

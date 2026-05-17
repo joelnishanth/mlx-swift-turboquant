@@ -2,7 +2,7 @@
 
 TurboQuant KV cache compression for [MLX Swift](https://github.com/ml-explore/mlx-swift) — bringing 3-bit key and 3-bit value compression to on-device LLM inference on Apple Silicon.
 
-Based on the TurboQuant algorithm ([Zandieh et al., arXiv 2504.19874](https://arxiv.org/abs/2504.19874)), this repository provides:
+Based on the TurboQuant algorithm from [Google Research](https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/) ([Zandieh et al., ICLR 2026, arXiv 2504.19874](https://arxiv.org/abs/2504.19874)), this repository provides:
 
 - A **benchmark CLI** (`TurboQuantBench`) that measures fp16 vs TurboQuant KV cache performance on identical workloads
 - **Integration guide** for adding TurboQuant to MLX Swift LLM applications
@@ -39,7 +39,7 @@ This achieves ~3.1-bit keys and 3-bit values while maintaining output quality, w
 
 ## Expected Performance Characteristics
 
-Based on the TurboQuant paper (Table 1, arXiv 2504.19874) and our MLX Swift implementation:
+Based on the [TurboQuant paper](https://arxiv.org/abs/2504.19874) (Table 1, Zandieh et al., ICLR 2026) and our MLX Swift implementation:
 
 | Metric | fp16 Baseline | TurboQuant (3-bit) | Delta |
 |--------|:------------:|:------------------:|:-----:|
@@ -207,9 +207,26 @@ Input tokens → KV Cache (fp16)
 | `KVCache.swift` | joelnishanth/mlx-swift-lm | Hot-window eviction logic |
 | `AttentionUtils.swift` | joelnishanth/mlx-swift-lm | Decode path in attention |
 
+## Attribution
+
+This implementation is inspired by **TurboQuant**, a vector quantization algorithm developed at **Google Research** and **Google DeepMind**. TurboQuant was presented at **ICLR 2026**.
+
+### Research Papers
+
+- **TurboQuant**: Amir Zandieh, Majid Daliri, Majid Hadian, Vahab Mirrokni. *"TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate"*, ICLR 2026. [arXiv 2504.19874](https://arxiv.org/abs/2504.19874)
+- **PolarQuant**: *"PolarQuant: Polar Coordinate Quantization for Vector Compression"*, AISTATS 2026. [arXiv 2502.02617](https://arxiv.org/abs/2502.02617)
+- **QJL**: *"Quantized Johnson-Lindenstrauss Transform"*, AAAI 2025. [ACM DL](https://dl.acm.org/doi/10.1609/aaai.v39i24.34773)
+
+### Google Research Blog
+
+- [TurboQuant: Redefining AI efficiency with extreme compression](https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/) — March 2026
+
+### Acknowledgements
+
+TurboQuant was developed by Amir Zandieh (Google Research), Majid Daliri (NYU), Majid Hadian (Google DeepMind), and Vahab Mirrokni (Google Research), with contributions from Praneeth Kacham, Insu Han, Lars Gottesbüren, and Rajesh Jayaram. This Swift implementation adapts their algorithms for Apple Silicon via the MLX framework.
+
 ## References
 
-- Zandieh et al., "TurboQuant: Online KV Cache Quantization with Provably Minimal Error", arXiv 2504.19874 (2025)
 - [ml-explore/mlx-swift](https://github.com/ml-explore/mlx-swift) — Apple MLX framework for Swift
 - [ml-explore/mlx-swift-lm](https://github.com/ml-explore/mlx-swift-lm) — MLX Swift LLM library
 
